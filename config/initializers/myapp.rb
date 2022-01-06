@@ -1,0 +1,2 @@
+BITLEY_TOKEN='6a891c7ba18bbc4154721eec463cbcfd58fc21ff'
+BITLEY_CLIENT= Bitly::API::Client.new(token: BITLEY_TOKEN)

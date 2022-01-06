@@ -7,12 +7,22 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
+# 5.times do
+# 	Member.create!(
+# 		first_name: Faker::Name.first_name,
+# 		last_name:  Faker::Name.last_name,
+# 		url: Faker::Internet.url(host: 'example.com'),
+# 		email: Faker::Internet.email,
+# 		password: Faker::Internet.password(min_length: 8)
+# 	)
+# end
 5.times do
-	Member.create!(
-		first_name: Faker::Name.first_name,
-		last_name:  Faker::Name.last_name,
-		url: Faker::Internet.url(host: 'example.com'),
-		email: Faker::Internet.email,
-		password: Faker::Internet.password(min_length: 8)
-	)
+  puts "Creating user.."
+  Member.create_member(
+	  first_name: Faker::Name.first_name,
+	  last_name:  Faker::Name.last_name,
+	  url: Faker::Internet.url(host: 'example.com'),
+	  email: Faker::Internet.email,
+	  password: Base64.encode64("Mypassword")
+  )
 end
