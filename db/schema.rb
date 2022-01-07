@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2022_01_04_082802) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["friend_id", "member_id"], name: "index_friend_ships_on_friend_id_and_member_id", unique: true
+    t.index ["member_id", "friend_id"], name: "index_friend_ships_on_member_id_and_friend_id", unique: true
   end
 
   create_table "member_websites", force: :cascade do |t|

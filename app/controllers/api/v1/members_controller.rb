@@ -1,13 +1,15 @@
 class Api::V1::MembersController < ApplicationController
   
   def index
-    members = Member.order('created_at DESC')
+    members = Member.member_details
+
     render json: {status: 'SUCCESS', message:'Display Members', data:members}, status: :ok
   end
 
   def show
     member = Member.includes(:member_website, :friends).where(id: params[:id]).first
-    render json: {status: 'SUCCESS', message:'loaded Member', data:{member: member, webiste: member.member_website, friends: member.friends}}, status: :ok
+    render json: {status: 'SUCCESS', message:'loaded Member', data:{member: member, webiste: member.member_website, 
+      friends: member.friend_with_links}}, status: :ok
   end
 
   def create
@@ -43,6 +45,15 @@ class Api::V1::MembersController < ApplicationController
     end
   end
 
+  # def delete_friend
+  #   result = Member.delete_friend(params[:member_id], params[:friend_id])
+  #   if result[:member].present?
+  #     render json: {status: 'SUCCESS', message: result[:msg]}, status: :ok
+  #   else
+  #     render json: {status: 'ERROR', message:'Member not saved'}, status: :unprocessable_entity
+  #   end
+  # end
+
   def get_friends
     # 	puts @current_member
     member = Member.where(id: params[:member_id]).first
@@ -52,6 +63,17 @@ class Api::V1::MembersController < ApplicationController
       render json: {status: 'SUCCESS', message:'Friends displayed successfully', data:{member: member, friends: friends}}, status: :ok
     else
       render json: {status: 'ERROR', message:'Friends can not be displayed'}, status: :unprocessable_entity
+    end
+  end
+
+  def get_experts
+    member = Member.where(id: params[:member_id]).first
+    #member = @current_member
+    if member.present?
+      experts_via_friends = member.get_experts
+      render json: {status: 'SUCCESS', data:{member: member, experts_via_friends:experts_via_friends}}, status: :ok
+    else
+      render json: {status: 'ERROR', message:'Recommendations can not be displayed', data:member.errors}, status: :unprocessable_entity
     end
   end
 

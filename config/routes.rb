@@ -8,6 +8,8 @@ Rails.application.routes.draw do
         collection do
           post :add_friend
           get :get_friends
+          get :get_experts
+          get :delete_friend
         end	
       end
     end
