@@ -1,9 +1,9 @@
 module IncludeConstants
 
-  NAME_REGEX = /\A[^[:cntrl:]\\<>\/&]*\z/ # Unicode, permissive
-  BAD_NAME_MESSAGE = "avoid non-printing characters and \\&gt;&lt;&amp;/ please."
+  # NAME_REGEX = /\A[^[:cntrl:]\\<>\/&]*\z/ # Unicode, permissive
+  # BAD_NAME_MESSAGE = "avoid non-printing characters and \\&gt;&lt;&amp;/ please."
   MINIMUM_PASSWORD_LENGTH = 8
-  MAXIMUM_PASSWORD_LENGTH = 30
+  MAXIMUM_PASSWORD_LENGTH = 255
 
   EMAIL_NAME_REGEX = '[\w\.%\+\-]+'.freeze
   DOMAIN_HEAD_REGEX = '(?:[A-Z0-9](?:[A-Z0-9-]*[A-Z0-9])?\.)+'.freeze

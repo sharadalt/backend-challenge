@@ -7,9 +7,9 @@ Rails.application.routes.draw do
       resources :members do
         collection do
           post :add_friend
+          post :login
           get :get_friends
           get :get_experts
-          get :delete_friend
         end	
       end
     end
